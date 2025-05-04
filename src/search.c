@@ -2,13 +2,13 @@
 #include <string.h>
 #include "animal.h"
 
-int chercheNom(Animal liste[], int taille, char* tabAnimal) {
+int chercheNom(Animal liste[], int taille, char* nomAnimal) {
     for (int i = 0; i < taille; i++) {
-        if (/* ........ */) {
-            return 1; 
+        if ( strcmp(liste[i].name, nomAnimal) == 0) {
+            return i; 
         }
     }
-    return 0;
+    return -1;
 }
 
 
