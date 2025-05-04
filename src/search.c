@@ -11,6 +11,8 @@ int chercheNom(Animal liste[], int taille, char* tabAnimal) {
     return 0;
 }
 
+
+
 int chercheID(Animal liste[], int taille, int id) {
     for (int i = 0; i < taille; i++) {
         if (liste[i].id == id) {
