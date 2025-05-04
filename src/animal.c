@@ -9,7 +9,7 @@ void printAnimal (Animal a){
         printf("ESPECE : %s", a.species);
         printf("Année de naissaice : %d", a.birthYear);
         printf("POIDS : %f", a.weight);
-        printf("DESCRIPTION : %s" a.comment);
+        printf("DESCRIPTION : %s", a.comment);
 }
 
 Animal createAnimal(){
@@ -18,16 +18,16 @@ Animal createAnimal(){
     inputText("saisir le nom", a.name, 50); 
     inputText("saisir l'espece", a.species, 30 );
     printf("saisir l'année de naissance");
-    scanf("%d" &a.birthyear);
+    scanf("%d", &a.birthYear);
     printf("sasir le poids"); 
     scanf("%f", &a.weight);
     inputText("décrire l'animal", a.comment, 250 );
-
+        return a;
 
 }
 
 int generateId(){
-        return (int)time(NULL) % 1000000
+        return (int)time(NULL) % 1000000;
 }
 
 int calculateage( int birthYear){
