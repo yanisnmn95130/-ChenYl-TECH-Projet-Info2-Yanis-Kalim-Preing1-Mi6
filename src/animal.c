@@ -31,10 +31,29 @@ int generateId(){
 }
 
 int calculateage( int birthYear){
-        // utiliser time t
-}
-
+        time_t currentTime;
+        struct tm *localTime;
+        
+        time(&currentTime); // Obtenir l'heure actuelle
+        localTime = localtime(&currentTime); // Convertir en temps local
+        
+        return (localTime->tm_year + 1900) - birthYear; // utiliser time t
+        }
+        
 int addAnimal( Animal* animals, int animalCount){
-        // la taille de nb d'animaux dans le tab ne depassent pas la limite(50), elle doit creer un animal et l'enregister
+        if (animalCount >= 50) {
+        printf("Erreur : Nombre maximum d'animaux atteint (50)\n");
+        return animalCount;
+        }
+        
+        // Créer et ajouter le nouvel animal seulement si le tableau n'est pas plein
+        Animal newAnimal = createAnimal();
+        animals[animalCount] = newAnimal;
+        
+        printf("Animal ajouté avec succès !\n");
+        printAnimal(newAnimal);
+        
+        // Retourner le nouveau nombre d'animaux
+        return animalCount + 1; // la taille de nb d'animaux dans le tab ne depassent pas la limite(50), elle doit creer un animal et l'enregister
         // elle doit ainsi retourner le nv nb d'animaux
-    }
+        }
