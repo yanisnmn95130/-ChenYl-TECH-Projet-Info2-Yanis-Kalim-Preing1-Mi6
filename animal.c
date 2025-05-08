@@ -9,7 +9,7 @@ void printAnimal (Animal a){
         printf("ESPECE : %s", a.species);
         printf("Année de naissaice : %d", a.birthYear);
         printf("POIDS : %f", a.weight);
-        printf("DESCRIPTION : %s" a.comment);
+        printf("DESCRIPTION : %s", a.comment);
 }
 
 Animal createAnimal(){
@@ -18,42 +18,45 @@ Animal createAnimal(){
     inputText("saisir le nom", a.name, 50); 
     inputText("saisir l'espece", a.species, 30 );
     printf("saisir l'année de naissance");
-    scanf("%d" &a.birthyear);
+    scanf("%d", &a.birthYear);
     printf("sasir le poids"); 
     scanf("%f", &a.weight);
     inputText("décrire l'animal", a.comment, 250 );
-
+        return a;
 
 }
 
+
 int generateId(){
-        return (int)time(NULL) % 1000000
+        return (int)time(NULL) % 1000000;
 }
 
 int calculateage( int birthYear){
-       time_t currentTime;
-    struct tm *localTime;
-    
-    time(&currentTime);                  // Obtenir l'heure actuelle
-    localTime = localtime(&currentTime); // Convertir en temps local
-    
-    return (localTime->tm_year + 1900) - birthYear;  // utiliser time t
-}
-
+        time_t currentTime;
+        struct tm *localTime;
+        
+        time(&currentTime); // Obtenir l'heure actuelle
+        localTime = localtime(&currentTime); // Convertir en temps local
+        
+        return (localTime->tm_year + 1900) - birthYear; // utiliser time t
+        }
+        
 int addAnimal( Animal* animals, int animalCount){
-      if (animalCount >= 50) {
+        if (animalCount >= 50) {
         printf("Erreur : Nombre maximum d'animaux atteint (50)\n");
         return animalCount;
-    }
-    
-    // Créer et ajouter le nouvel animal seulement si le tableau n'est pas plein
-    Animal newAnimal = createAnimal();
-    animals[animalCount] = newAnimal;
-    
-    printf("Animal ajouté avec succès !\n");
-    printAnimal(newAnimal);
-    
-    // Retourner le nouveau nombre d'animaux
-    return animalCount + 1;  // la taille de nb d'animaux dans le tab ne depassent pas la limite(50), elle doit creer un animal et l'enregister
-        // elle doit ainsi retourner le nv nb d'animaux
-    }
+        }
+        
+       
+        Animal newAnimal = createAnimal();
+        animals[animalCount] = newAnimal;
+        
+        printf("Animal ajouté avec succès !\n");
+        printAnimal(newAnimal);
+        
+        
+        return animalCount + 1; 
+       
+        }
+
+
