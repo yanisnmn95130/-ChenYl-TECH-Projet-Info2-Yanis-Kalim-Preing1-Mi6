@@ -15,7 +15,7 @@ void printAnimal (Animal a){
 Animal createAnimal(){
     Animal a;
     a.id = generateId();
-    inputText("saisir le nom", a.name, 50); 
+    inputText("saisir le nom", a.name, 50);// inputText: fonction permettant laffichage dun champs de texte, le stockage de ce texte et def dune limite de caractere
     inputText("saisir l'espece", a.species, 30 );
     printf("saisir l'année de naissance");
     scanf("%d", &a.birthYear);
@@ -27,18 +27,19 @@ Animal createAnimal(){
 }
 
 int generateId(){
-        return (int)time(NULL) % 1000000;
+        return (int)time(NULL) % 1000000;// genere un nombre aleatoire comprt entre 0 et 999999
 }
 
 int calculateage( int birthYear){
-        time_t currentTime;
-        struct tm *localTime;
+        time_t currentTime;//time_t stocke le temps sous forme de seconde 
+        struct tm *localTime;// localTime est un pointeur vers une structure tm, qui stocke des informations détaillées sur la date et l'heure
         
-        time(&currentTime); // trouver l'heure actuelle
-        localTime = localtime(&currentTime); // Convertir en temps local
+        time(&currentTime); // time():récupère le temps  ,donc time(&currentTime) recup temps actuelle
+        localTime = localtime(&currentTime); // localtime(&currentTime) convertit ce temps brut en une structure tm, 
+        //localTime : Devient un pointeur vers cette structure contenant la date et l'heure locales.
         
-        return (localTime->tm_year + 1900) - birthYear; // utiliser time t
-        }
+        return (localTime->tm_year + 1900) - birthYear; // Le champ tm_year dans la structure tm stocke l'année, courante moins 1900.
+        }//Accéder à la valeur du champ tm_year dans la structure tm pointée par localTime.
         
 int addAnimal( Animal* animals, int animalCount){
         if (animalCount >= 50) {
@@ -47,8 +48,8 @@ int addAnimal( Animal* animals, int animalCount){
         }
         
         // Créer et ajouter le nouvel animal seulement si le tableau n'est pas plein
-        Animal newAnimal = createAnimal();
-        animals[animalCount] = newAnimal;
+        Animal newAnimal = createAnimal();//newAnimal : Variable qui stocke cet animal 
+        animals[animalCount] = newAnimal;// Ajoute le nouvel animal dans le tableau
         
         printf("Animal ajouté avec succès !\n");
         printAnimal(newAnimal);
@@ -61,7 +62,7 @@ int addAnimal( Animal* animals, int animalCount){
 void presentRefuge( Animal liste[], int taille){
         for (int i = 0; i < taille ; i++){
                 printf("animal %d :\n ", i);
-                printAnimal(liste[i]);
+                printAnimal(liste[i]);// printAnimal() prend un animal et affiche ses détails 
                 
         }
 }
@@ -77,19 +78,19 @@ void adoptAnimal(Animal liste[], int *taille) {
         int trouve = 0;
     
         for (int i = 0; i < *taille; i++) {
-            if (strcmp(liste[i].name, nomAnimal) == 0) {
+            if (strcmp(liste[i].name, nomAnimal) == 0) { //vérifie si les deux noms sont identiques,Si strcmp() retourne 0, cela signifie que l'animal recherché a été trouvé.
                 printf("Félicitations !! %s vous appartient désormais, prenez-en soin !\n", nomAnimal);
                 // Supprimer l'animal adopté en décalant le reste
-                for (int j = i; j < *taille - 1; j++) {
+                for (int j = i; j < *taille - 1; j++) {//Décale tous les animaux vers la gauche après l'animal supprimé. 
                     liste[j] = liste[j + 1];
                 }
-                (*taille)--; 
+                (*taille)--; //Réduit la taille du refuge ((*taille)--).
                 trouve = 1;
                 break; 
             }
         }
     
-        if (!trouve) {
+        if (trouve == NULL) {
             printf("Erreur : animal non trouvé.\n");
         }
 }
