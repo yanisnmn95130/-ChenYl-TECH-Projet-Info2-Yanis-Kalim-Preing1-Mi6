@@ -1,17 +1,14 @@
 #ifndef ANIMAL_H
 #define ANIMAL_H
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
-void inputText(const char *prompt, char *buffer, int bufferSize) {
-    printf("%s: ", prompt);
-    fgets(buffer, bufferSize, stdin);
 
-    // Supprimer le caractère de nouvelle ligne (\n) si présent
-    size_t len = strlen(buffer);
-    if (len > 0 && buffer[len - 1] == '\n') {
-        buffer[len - 1] = '\0';
-    }
+void inputText(const char *message, char *buffer, int size) {
+    printf("%s", message);
+    fgets(buffer, size, stdin);
 }
-
 
 typedef struct {
     int id ;

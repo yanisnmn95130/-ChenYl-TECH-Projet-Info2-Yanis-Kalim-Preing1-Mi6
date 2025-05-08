@@ -34,7 +34,7 @@ int calculateage( int birthYear){
         time_t currentTime;
         struct tm *localTime;
         
-        time(&currentTime); // Obtenir l'heure actuelle
+        time(&currentTime); // trouver l'heure actuelle
         localTime = localtime(&currentTime); // Convertir en temps local
         
         return (localTime->tm_year + 1900) - birthYear; // utiliser time t
@@ -57,3 +57,39 @@ int addAnimal( Animal* animals, int animalCount){
         return animalCount + 1; // la taille de nb d'animaux dans le tab ne depassent pas la limite(50), elle doit creer un animal et l'enregister
         // elle doit ainsi retourner le nv nb d'animaux
         }
+
+void presentRefuge( Animal liste[], int taille){
+        for (int i = 0; i < taille ; i++){
+                printf("animal %d :\n ", i);
+                printAnimal(liste[i]);
+                
+        }
+}
+
+void adoptAnimal(Animal liste[], int *taille) {
+        char nomAnimal[50];
+    
+        presentRefuge(liste, *taille);
+    
+        printf("Tapez le nom de l'animal que vous voulez adopter : ");
+        scanf("%s", nomAnimal);
+    
+        int trouve = 0;
+    
+        for (int i = 0; i < *taille; i++) {
+            if (strcmp(liste[i].name, nomAnimal) == 0) {
+                printf("Félicitations !! %s vous appartient désormais, prenez-en soin !\n", nomAnimal);
+                // Supprimer l'animal adopté en décalant le reste
+                for (int j = i; j < *taille - 1; j++) {
+                    liste[j] = liste[j + 1];
+                }
+                (*taille)--; 
+                trouve = 1;
+                break; 
+            }
+        }
+    
+        if (!trouve) {
+            printf("Erreur : animal non trouvé.\n");
+        }
+}
