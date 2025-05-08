@@ -3,30 +3,11 @@
   "configurations": [
     {
       "name": "C/C++ Runner: Debug Session",
-<<<<<<< HEAD
       "type": "lldb",
       "request": "launch",
       "args": [],
       "cwd": "/Users/yanisn/Desktop/-ChenYl-TECH-Projet-Info2-Yanis-Kalim-Preing1-Mi6",
       "program": "/Users/yanisn/Desktop/-ChenYl-TECH-Projet-Info2-Yanis-Kalim-Preing1-Mi6/build/Debug/outDebug"
-=======
-      "type": "cppdbg",
-      "request": "launch",
-      "args": [],
-      "stopAtEntry": false,
-      "externalConsole": true,
-      "cwd": "c:/Users/kalim/Desktop/projet_info/-ChenYl-TECH-Projet-Info2-Yanis-Kalim-Preing1-Mi6/src",
-      "program": "c:/Users/kalim/Desktop/projet_info/-ChenYl-TECH-Projet-Info2-Yanis-Kalim-Preing1-Mi6/src/build/Debug/outDebug",
-      "MIMode": "gdb",
-      "miDebuggerPath": "gdb",
-      "setupCommands": [
-        {
-          "description": "Enable pretty-printing for gdb",
-          "text": "-enable-pretty-printing",
-          "ignoreFailures": true
-        }
-      ]
->>>>>>> origin/kalim
     }
   ]
 }
