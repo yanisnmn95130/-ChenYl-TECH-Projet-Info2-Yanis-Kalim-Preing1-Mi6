@@ -8,6 +8,7 @@
 void inputText(const char *message, char *buffer, int size) {
     printf("%s", message);
     fgets(buffer, size, stdin);
+    printf("\n");
 }
 
 typedef struct {
