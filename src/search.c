@@ -11,17 +11,6 @@ int chercheNom(Animal liste[], int taille, char* nomAnimal) {
     return 0;
 }
 
-
-
-int chercheID(Animal liste[], int taille, int id) {
-    for (int i = 0; i < taille; i++) {
-        if (liste[i].id == id) {
-            return i;;
-        }
-    }
-    return 0;
-}
-
 int chercheSpecies(Animal liste[], int taille, char* specie) {
     for (int i = 0; i < taille; i++) {
         if (strcmp(liste[i].species,  specie) == 0) {
