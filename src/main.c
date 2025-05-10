@@ -12,7 +12,7 @@
 int main () {
     int choixMenu;
     printf("Bienvenue dans notre animalerie! Quel action souhaitez-vous faire ?\n");
-    printf("menu :\n 1 : rechercher un/des animaux \n 2 : Nous confier votre animal\n 3 : Adopter un animal \n 4 : Afficher l'inventaire");
+    printf("menu :\n 1 : rechercher un/des animaux \n 2 : Nous confier votre animal\n 3 : Adopter un animal \n 4 : Afficher l'inventaire \n 5 : Besoin de nourriture pour la journée\n 6 : Quitter\n");
     scanf("%d", &choixMenu);
     if (choixMenu == 1){
         printf("voulez vous rechercher un animal par \n 1 : Nom\n 2 : Espèce\n 3 : Age\n");
@@ -53,18 +53,21 @@ int main () {
         
     }
     else if (choixMenu == 2){
-        printf("Nous confier votre animal\n");
         addAnimal(liste, taille);
     }
     else if (choixMenu == 3){
-        printf("Adopter un animal\n");
         adoptAnimal(liste, &taille);
     }
     else if (choixMenu == 4){
-        printf("Afficher l'inventaire\n");
         presentRefuge(liste, taille);
     }
-    
+    else if (choixMenu == 5){
+        dayFood(liste, taille);
+    }
+    else if (choixMenu == 6){
+        printf("Merci d'avoir utilisé notre service !\n");
+        return 0;
+    }
     
     else{
         printf("erreur\n");
