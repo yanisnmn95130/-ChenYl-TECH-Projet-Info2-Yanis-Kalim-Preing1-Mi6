@@ -94,3 +94,52 @@ void adoptAnimal(Animal liste[], int *taille) {
             printf("Erreur : animal non trouvé.\n");
         }
 }
+
+void dayFood (Animal liste[], int size){
+        int tabNourriture[3];
+        int tabNourritureTotal = 0;
+
+        for ( int i = 0 ; i < size ; i++){
+                if( strcmp(liste[i].species, "hamster" ) == 0){
+                        int quantite = 20;
+                        printf("%s a besoin de %d grammes de croquettes par jour", liste[i].name, quantite);
+                        tabNourriture[2] += 20;
+                }
+                if( strcmp(liste[i].species, "autruche" ) == 0){
+                        int quantite = 2500;
+                        printf("%s a besoin de %d grammes de croquettes par jour", liste[i].name, quantite);
+                        tabNourriture[3] += 2500;
+                }
+                if( strcmp(liste[i].species, "chat" ) == 0){
+                        int quantite = 500;
+                        if( calculateage(liste[i].birthYear) < 2){
+                                printf("%s a besoin de %d grammes de croquettes par jour", liste[i].name, quantite);
+                                tabNourriture[0] += 500;
+                        }
+                        else{
+                                quantite = (int)(10*liste[i].weight)/ 100;
+                                printf("%s a besoin de %d grammes de croquettes par jour", liste[i].name, quantite);
+                                tabNourriture[0] += quantite;
+                        }
+                }
+                if( strcmp(liste[i].species, "chien" ) == 0){
+                        int quantite = 500;
+                        if( calculateage(liste[i].birthYear) < 2){
+                                printf("%s a besoin de %d grammes de croquettes par jour", liste[i].name, quantite);
+                                tabNourriture[1] += quantite;
+                        }
+                        else{
+                                quantite = (int)((10*liste[i].weight)/ 100);
+                                printf("%s a besoin de %d grammes de croquettes par jour", liste[i].name, quantite);
+                                tabNourriture[1] += quantite;
+                        }
+                }
+                for ( int i = 0 ; i < 3; i++){
+                        tabNourritureTotal += tabNourriture[i];
+                }
+                printf("%d", tabNourritureTotal);
+                
+                
+
+        }
+}
