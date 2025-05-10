@@ -30,6 +30,12 @@ int calculateage( int birthYear);
 
 int addAnimal( Animal* animals, int animalCount);
 
+void presentRefuge( Animal liste[], int taille);
+
+void adoptAnimal(Animal liste[], int *taille);
+
+void dayFood (Animal liste[], int size);
+
 
 
 
