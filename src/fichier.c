@@ -1,6 +1,8 @@
 #include "animal.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "fichier.h"
+#include "animal.c"
 
 int saveAnimal(Animal a)
 {
@@ -90,16 +92,33 @@ int countAnimals(const char *filename)
     return count;
 }
 
-int deleteAnimal(Animal *animals, int *size, int id)
-{
-    for (int i = 0; i < *size; i++)
-    {
-        if (animals[i].id == id)
-        {
-            animals[i] = animals[*size - 1];
-            (*size)--;
-            return 1;
+
+
+void adoptAnimal(Animal liste[], int *taille) {
+        int idAnimal;
+    
+        presentRefuge(liste, *taille);
+    
+        printf("Tapez l'ID de l'animal que vous voulez adopter : ");
+        scanf("%d", &idAnimal);
+    
+        int trouve = 0;
+    
+        for (int i = 0; i < *taille; i++) {
+            if (liste[i].id == idAnimal) {
+                printf("Félicitations !! %s vous appartient désormais, prenez-en soin !\n", liste[i].name);
+                // Supprimer l'animal adopté en décalant le reste
+                for (int j = i; j < *taille - 1; j++) {
+                    liste[j] = liste[j + 1];
+                }
+                (*taille)--; 
+                trouve = 1;
+                break; 
+            }
         }
-    }
-    return 0;
+    
+        if (!trouve) {
+            printf("Erreur : animal non trouvé.\n");
+        }
 }
+

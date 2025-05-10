@@ -66,34 +66,6 @@ void presentRefuge( Animal liste[], int taille){
         }
 }
 
-void adoptAnimal(Animal liste[], int *taille) {
-        char nomAnimal[50];
-    
-        presentRefuge(liste, *taille);
-    
-        printf("Tapez le nom de l'animal que vous voulez adopter : ");
-        scanf("%s", nomAnimal);
-    
-        int trouve = 0;
-    
-        for (int i = 0; i < *taille; i++) {
-            if (strcmp(liste[i].name, nomAnimal) == 0) {
-                printf("Félicitations !! %s vous appartient désormais, prenez-en soin !\n", nomAnimal);
-                // Supprimer l'animal adopté en décalant le reste
-                for (int j = i; j < *taille - 1; j++) {
-                    liste[j] = liste[j + 1];
-                }
-                (*taille)--; 
-                trouve = 1;
-                break; 
-            }
-        }
-    
-        if (!trouve) {
-            printf("Erreur : animal non trouvé.\n");
-        }
-}
-
 void dayFood (Animal liste[], int size){
         int tabNourriture[3];
         int tabNourritureTotal = 0;
@@ -136,7 +108,7 @@ void dayFood (Animal liste[], int size){
                 for ( int i = 0 ; i < 3; i++){
                         tabNourritureTotal += tabNourriture[i];
                 }
-                printf("%d", tabNourritureTotal);
+                printf("la quantité necessaire aujourd'hui pour nourrire tout les animaux du refuge est de %d grammes", tabNourritureTotal);
                 
                 
 
