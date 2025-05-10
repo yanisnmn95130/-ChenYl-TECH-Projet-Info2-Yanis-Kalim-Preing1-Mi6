@@ -72,6 +72,20 @@ int loadAnimals(Animal *animals, int maxSize)
     return count;
 }
 
+int deleteAnimal(Animal *animals, int *size, int id)
+{
+    for (int i = 0; i < *size; i++)
+    {
+        if (animals[i].id == id)
+        {
+            animals[i] = animals[*size - 1];
+            (*size)--;
+            return 1;
+        }
+    }
+    return 0;
+}
+
 int countAnimals(const char *filename)
 {
     FILE *file = fopen(filename, "r");

@@ -5,8 +5,8 @@
 int saveAnimal(Animal a);
 int loadAnimals(Animal* animals, int maxSize);
 int deleteAnimal(Animal id);
-int countAnimals();
-
+int countAnimals(const char *filename);
+void adoptAnimal(Animal liste[], int *taille);
 #endif
 
 
