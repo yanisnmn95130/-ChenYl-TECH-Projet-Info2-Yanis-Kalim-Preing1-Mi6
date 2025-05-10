@@ -8,7 +8,7 @@ int chercheNom(Animal liste[], int taille, char* nomAnimal) {
             printAnimal(liste[i]); 
         }
     }
-    return -1;
+    return 0;
 }
 
 
