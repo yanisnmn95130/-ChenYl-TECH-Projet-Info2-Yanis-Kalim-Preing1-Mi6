@@ -6,7 +6,6 @@
 #include "animal.c"
 #include "fichier.c"
 #include "search.c"
-#
 
 
 
@@ -41,9 +40,9 @@ int main () {
             }
         }
         else if (choixRecherche == 3){
-            char age[10];
+            int age;
             printf("Quel est l'age de l'animal ?\n");
-            scanf("%s", age);
+            scanf("%d", age);
             chercheAge(liste, taille, age);
             if(chercheAge(liste, taille, age) == 0){
                 printf("animal non trouvé");
@@ -70,7 +69,7 @@ int main () {
     else{
         printf("erreur\n");
     }
-    
+
     return 0;
 }
 
