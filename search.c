@@ -19,3 +19,30 @@ int chercheID(Animal liste[], int taille, int id) {
     }
     return 0;
 }
+
+int chercheSpecies(Animal liste[], int taille, char* specie) {
+    for (int i = 0; i < taille; i++) {
+        if (strcmp(liste[i].species,  specie) == 0) {
+            printAnimal(liste[i]);
+        }
+    }
+    return 0;
+}
+
+int chercheAge(Animal liste[], int taille, char* age) {
+    for (int i = 0; i < taille; i++) {
+        if (strcmp(age, "jeune") == 0) {
+            if(calculateage(liste[i].birthYear) < 2){
+                printAnimal(liste[i]);
+            }
+        }
+        if (strcmp(age, "senior") == 0){
+            if (calculateage(liste[i].birthYear) > 10) {
+                printAnimal(liste[i]);
+            }
+            
+        }
+    }
+    
+    return 0;
+}
