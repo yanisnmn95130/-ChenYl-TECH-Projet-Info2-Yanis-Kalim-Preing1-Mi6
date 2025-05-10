@@ -29,6 +29,8 @@ int calculateage( int birthYear);
 
 int addAnimal( Animal* animals, int animalCount);
 
+void dayFood (Animal liste[], int size);
+
 
 
 
