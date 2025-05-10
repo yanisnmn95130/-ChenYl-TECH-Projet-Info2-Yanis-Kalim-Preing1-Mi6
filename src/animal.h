@@ -31,6 +31,9 @@ int addAnimal( Animal* animals, int animalCount);
 
 void dayFood (Animal liste[], int size);
 
+void presentRefuge( Animal liste[], int taille);
+    
+void adoptAnimal(Animal liste[], int *taille);
 
 
 
