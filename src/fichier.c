@@ -28,7 +28,7 @@ int saveAnimals(Animal *animals, int size)
     char filename[50];
     scanf("%s", filename);
     char finalFilename[100];
-    snprintf(finalFilename, sizeof(finalFilename), "../animals/%s", filename);
+    snprintf(finalFilename, sizeof(finalFilename), "./src/animals/%s", filename);
 
     FILE *file = fopen(finalFilename, "w"); // "w" écrase le contenu existant du fichier.
     if (file == NULL)
@@ -62,7 +62,7 @@ int loadAnimals(Animal *animals, int maxSize)
     char filename[50];
     scanf("%s", filename);
     char finalFilename[100];
-    snprintf(finalFilename, sizeof(finalFilename), "../animals/%s", filename);
+    snprintf(finalFilename, sizeof(finalFilename), "./src/animals/%s", filename);
 
     FILE *file = fopen(finalFilename, "r");
     if (file == NULL)
