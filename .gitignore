@@ -2,6 +2,7 @@
 *.o
 *.out
 *.exe
+*.txt
 
 # Fichiers de compilation
 *.log
