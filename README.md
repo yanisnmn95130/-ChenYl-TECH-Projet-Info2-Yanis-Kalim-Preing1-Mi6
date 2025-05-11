@@ -31,7 +31,7 @@ chargerAnimaux() : Charge la liste des animaux depuis un fichier.
 
 compterAnimaux() : Compte les entrées valides dans un fichier animalier.
 
-Pour compiler il faut ouvrir un terminal, tapper make clean, ensuite make et ensuite ./output/refuge.
+Pour compiler il faut ouvrir un terminal, tapper make clean, ensuite make et ensuite ./output/refuge
 
 Lorsque vous choisissez l'option ajouter un animal, l’application vous guide pour saisir les informations nécessaires à l’ajout d’un nouvel animal. Un identifiant unique est automatiquement généré. L’animal est alors ajouté à la base de données (en mémoire), et un message confirme son enregistrement avec un affichage complet de ses informations.
 
