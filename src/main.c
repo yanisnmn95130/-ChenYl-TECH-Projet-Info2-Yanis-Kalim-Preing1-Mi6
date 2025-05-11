@@ -3,6 +3,10 @@
 #include "animal.h"
 #include "fichier.h"
 #include "search.h"
+#include "animal.c"
+#include "fichier.c"
+#include "search.c"
+
 
 
 int main () {
@@ -42,7 +46,7 @@ int main () {
             }
         }
         else if (choixRecherche == 3){
-            char* age;
+            char age[10];
             printf("Cherchez vous un animal jeune ou senior ?\n");
             scanf("%s", age);
             int resultat= chercheAge(liste, taille, age);
