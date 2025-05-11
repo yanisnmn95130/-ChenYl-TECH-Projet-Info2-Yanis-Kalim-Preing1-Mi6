@@ -6,12 +6,14 @@
 
 
 void printAnimal (Animal a){
+        printf("[ ");
         printf("ID : %d ", a.id);
-        printf("NOM : %s ", a.name);
-        printf("ESPECE : %s ", a.species);
-        printf("Année de naissance : %d ", a.birthYear);
-        printf("POIDS : %f ", a.weight);
-        printf("DESCRIPTION : %s ", a.comment);
+        printf("| NOM : %s ", a.name);
+        printf("| ESPECE : %s ", a.species);
+        printf("| Année de naissance : %d ", a.birthYear);
+        printf("| POIDS : %.2f ", a.weight);
+        printf("| DESCRIPTION : %s ", a.comment);
+        printf(" ]\n");
 }
 
 int generateId(Animal *liste, int taille) {
@@ -70,7 +72,13 @@ Animal createAnimal(Animal *liste, int taille){
 
 
         void presentRefuge( Animal liste[], int taille){
-        for (int i = 0; i < taille ; i++){
+            printf("\n===== Inventaire du Refuge =====\n");
+
+            if (taille == 0) {
+                printf("Aucun animal dans le refuge.\n");
+                return;
+            }
+            for (int i = 0; i < taille ; i++){
                 printf("animal %d :\n ", i+1);
                 printAnimal(liste[i]);// printAnimal() prend un animal et affiche ses détails 
                 

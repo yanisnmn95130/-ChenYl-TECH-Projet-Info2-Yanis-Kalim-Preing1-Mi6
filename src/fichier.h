@@ -6,6 +6,6 @@ int saveAnimal(Animal a);
 int loadAnimals(Animal* animals, int maxSize);
 int deleteAnimal(Animal *animals, int *size, int id);
 int countAnimals(const char *filename);
+int saveAnimals(Animal *animals, int size);
 
 #endif
-

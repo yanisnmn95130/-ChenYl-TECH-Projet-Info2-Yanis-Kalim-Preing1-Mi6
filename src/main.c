@@ -8,23 +8,11 @@
 
 #define MAX_ANIMAUX 50
 
-void afficherInventaire(Animal *animaux, int taille) {
-    printf("\n===== Inventaire du Refuge =====\n");
-
-    if (taille == 0) {
-        printf("Aucun animal dans le refuge.\n");
-        return;
-    }
-    presentRefuge(animaux, taille);
-
-    
-    dayFood(animaux, taille);
-}
 
 int main() {
     Animal animaux[MAX_ANIMAUX];
-    int taille = loadAnimals(animaux, MAX_ANIMAUX);
-
+    /*int taille = loadAnimals(animaux, MAX_ANIMAUX);*/
+    int taille = 0; // Initialisation de la taille à 0
     int choix;
     do {
         printf("\n===== Menu du Refuge Animalier =====\n");
@@ -33,14 +21,15 @@ int main() {
         printf("3. Adopter un animal\n");
         printf("4. Afficher l'inventaire\n");
         printf("5. Gérer le quotidien (Nourriture)\n");
-        printf("6. Quitter\n");
+        printf("6. charger un refuge \n");
+        printf("7. Sauvegarder\n");
+        printf("8. Quitter\n");
         printf("Choisissez une option : ");
         if (scanf("%d", &choix) != 1) {
             printf("Entrée invalide. Veuillez entrer un nombre.\n");
             while (getchar() != '\n'); 
-            continue;//est utilisé pour sauter le reste du code dans une boucle et passer directement à l'itération suivante.
+            continue;
         }
-
         switch (choix) {
             case 1: // Ajouter un animal
                 if (taille < MAX_ANIMAUX) {
@@ -116,7 +105,7 @@ int main() {
                 break;
             }
 
-            case 3: {  
+            case 3: { 
                 int id;
                 printf("Entrez l'ID de l'animal à adopter : ");
                 if (scanf("%d", &id) != 1) {
@@ -133,25 +122,40 @@ int main() {
             }
 
             case 4: 
-                afficherInventaire(animaux, taille);
+                presentRefuge(animaux, taille);
                 break;
 
             case 5: 
                 dayFood(animaux, taille);
                 break;
 
-            case 6: 
-                printf("Sauvegarde des données...\n");
-                for (int i = 0; i < taille; i++) {
-                    saveAnimal(animaux[i]);
+                case 6:
+                printf("Chargement des animaux depuis le fichier...\n");
+                taille = loadAnimals(animaux, MAX_ANIMAUX);
+                if (taille > 0)
+                {
+                    printf("Animaux chargés avec succès !\n");
+                    presentRefuge(animaux, taille);
                 }
+                else
+                {
+                    printf("Aucun animal trouvé dans le fichier.\n");
+                }
+                break;
+            case 7:
+                printf("Sauvegarde des données...\n");
+                saveAnimals(animaux, taille);
+                break;
+            case 8:
+                printf("Sauvegarde des données...\n");
+                saveAnimals(animaux, taille);
                 printf("Au revoir !\n");
                 break;
-
+    
             default:
                 printf("Option invalide, veuillez réessayer.\n");
-        }
-    } while (choix != 6);
+            }
+    } while (choix != 8);
 
     return 0;
 }

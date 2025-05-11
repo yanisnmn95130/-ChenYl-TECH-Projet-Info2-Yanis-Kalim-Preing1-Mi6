@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/yanisn/Desktop/-ChenYl-TECH-Projet-Info2-Yanis-Kalim-Preing1-Mi6",
-      "program": "/Users/yanisn/Desktop/-ChenYl-TECH-Projet-Info2-Yanis-Kalim-Preing1-Mi6/build/Debug/outDebug"
+      "cwd": "/Users/yanisn/Desktop/-ChenYl-TECH-Projet-Info2-Yanis-Kalim-Preing1-Mi6-1",
+      "program": "/Users/yanisn/Desktop/-ChenYl-TECH-Projet-Info2-Yanis-Kalim-Preing1-Mi6-1/build/Debug/outDebug"
     }
   ]
 }

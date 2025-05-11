@@ -22,74 +22,71 @@ int saveAnimal(Animal a)
     fclose(file);
     return 1;
 }
+int saveAnimals(Animal *animals, int size)
+{
+    printf("donne le nom du fichier \n");
+    char filename[50];
+    scanf("%s", filename);
+    char finalFilename[100];
+    snprintf(finalFilename, sizeof(finalFilename), "../animals/%s", filename);
 
-int loadAnimals(Animal *animals, int maxSize) {
-    int NumberAnimal = 0;
-    int count = 0;
-
-    // Demande le nombre d'animaux à charger.
-    printf("Combien d'animaux voulez-vous charger (max %d) ? ", maxSize);
-    if (scanf("%d", &NumberAnimal) != 1) {
-        fprintf(stderr, "Erreur de lecture du nombre d'animaux.\n");
+    FILE *file = fopen(finalFilename, "w"); // "w" écrase le contenu existant du fichier.
+    if (file == NULL)
+    {
+        printf("Erreur lors de l'ouverture du fichier.\n");
         return 0;
     }
 
-    if (NumberAnimal > maxSize) {
-        printf("Limite max atteinte (%d). Seuls %d animaux seront chargés.\n", maxSize, maxSize);
-        NumberAnimal = maxSize;
+    for (int i = 0; i < size; i++)
+    {
+        if (fprintf(file, "%d;%s;%s;%d;%.2f;%s\n",
+                    animals[i].id,
+                    animals[i].name,
+                    animals[i].species,
+                    animals[i].birthYear,
+                    animals[i].weight,
+                    animals[i].comment) < 0)
+        {
+            fclose(file);
+            printf("Erreur lors de l'écriture dans le fichier.\n");
+            return 0;
+        }
     }
 
-    // Boucle de chargement des animaux.
-    for (int i = 0; i < NumberAnimal; i++) {
-        printf("\nAnimal %d :\n", i + 1);
+    fclose(file);
+    return 1;
+}
+int loadAnimals(Animal *animals, int maxSize)
+{
+    printf("donne le nom du fichier \n");
+    char filename[50];
+    scanf("%s", filename);
+    char finalFilename[100];
+    snprintf(finalFilename, sizeof(finalFilename), "../animals/%s", filename);
 
-        // Génération automatique de l'ID
-        animals[i].id = (i == 0) ? 1 : animals[i - 1].id + 1;
-        printf("  ID généré automatiquement : %d\n", animals[i].id);
+    FILE *file = fopen(finalFilename, "r");
+    if (file == NULL)
+    {
+        printf("Erreur : impossible d'ouvrir le fichier.\n");
+        return 0;
+    }
 
-        // Saisie du nom
-        printf("  Nom : ");
-        scanf("%s", animals[i].name);
-
-        // Saisie et validation de l'espèce
-        int especeValide = 0;
-        do {
-            printf("  Espèce (chat, chien, autruche, hamster) : ");
-            scanf("%s", animals[i].species);
-
-            if (strcmp(animals[i].species, "chat") == 0 ||
-                strcmp(animals[i].species, "chien") == 0 ||
-                strcmp(animals[i].species, "autruche") == 0 ||
-                strcmp(animals[i].species, "hamster") == 0) {
-                especeValide = 1;
-            } else {
-                printf("Erreur : Espèce invalide. Veuillez entrer une espèce valide.\n");
-            }
-        } while (!especeValide);
-
-        // Saisie de l'année de naissance
-        printf("  Année de naissance : ");
-        scanf("%d", &animals[i].birthYear);
-
-        // Saisie du poids
-        printf("  Poids (en kg) : ");
-        scanf("%f", &animals[i].weight);
-
-        // Saisie du commentaire
-        printf("  Commentaire : ");
-        getchar(); // Consomme le caractère '\n' restant dans le buffer
-        fgets(animals[i].comment, sizeof(animals[i].comment), stdin);
-
-        // Supprime le caractère de nouvelle ligne (\n) à la fin du commentaire
-        size_t len = strlen(animals[i].comment);
-        if (len > 0 && animals[i].comment[len - 1] == '\n') {
-            animals[i].comment[len - 1] = '\0';
-        }
-
+    int count = 0;
+    while (count < maxSize && fscanf(file, "%d;%49[^;];%29[^;];%d;%f;%249[^\n]",
+                                     &animals[count].id,
+                                     animals[count].name,
+                                     animals[count].species,
+                                     &animals[count].birthYear,
+                                     &animals[count].weight,
+                                     animals[count].comment) == 6)
+    {
         count++;
     }
+
+    fclose(file);
     return count;
 }
+
 
 
 int countAnimals(const char *filename)
