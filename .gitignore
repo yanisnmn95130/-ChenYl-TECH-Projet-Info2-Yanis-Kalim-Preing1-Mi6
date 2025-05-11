@@ -1,0 +1,37 @@
+# Fichiers binaires et objets
+*.o
+*.out
+*.exe
+
+# Fichiers de compilation
+*.log
+*.aux
+*.dSYM/
+*.stackdump
+
+# Fichiers spécifiques à macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Fichiers spécifiques à Visual Studio Code
+.vscode/
+*.code-workspace
+
+# Répertoires de build
+build/
+dist/
+Debug/
+Release/
+
+# Fichiers temporaires
+*.tmp
+*.bak
+*.swp
+*.swo
+*.~*
+
+# Fichiers de données
+animals.txt
+*.csv
+*.json
