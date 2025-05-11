@@ -1,0 +1,6 @@
+1;max;chat;2000;11.00;aa
+2;nmn;chien;2014;21.00;qq
+3;mfff;chat;2013;14.00;dd
+4;aa;autruche;2006;43.00;aaa
+5;mm;chat;2000;12.00;zzz
+6;max;chien;2014;21.00;ss
