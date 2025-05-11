@@ -11,7 +11,7 @@
 int main()
 {
     Animal animaux[MAX_ANIMAUX];
-    /*int taille = loadAnimals(animaux, MAX_ANIMAUX);*/
+    
     int taille = 0; // Initialisation de la taille à 0
     int choix;
     do
