@@ -1,14 +1,21 @@
 #ifndef ANIMAL_H
 #define ANIMAL_H
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 
-void inputText(const char *message, char *buffer, int size) {
-    printf("%s", message);
-    fgets(buffer, size, stdin);
+void inputText(const char *prompt, char *buffer, int bufferSize) {
+    printf("%s: ", prompt);
+    fgets(buffer, bufferSize, stdin);
+
+    // Supprimer le caractère de nouvelle ligne (\n) si présent
+    size_t len = strlen(buffer);
+    if (len > 0 && buffer[len - 1] == '\n') {
+        buffer[len - 1] = '\0';
+    }
 }
+
 
 typedef struct {
     int id ;
@@ -21,9 +28,9 @@ typedef struct {
 
 void printAnimal (Animal a);
 
-Animal createAnimal();
+Animal createAnimal(Animal *liste, int taille);
 
-int generateId();
+int generatId(Animal *liste, int taille);
 
 int calculateage( int birthYear);
 
@@ -32,8 +39,6 @@ int addAnimal( Animal* animals, int animalCount);
 void dayFood (Animal liste[], int size);
 
 void presentRefuge( Animal liste[], int taille);
-    
-void adoptAnimal(Animal liste[], int *taille);
 
 
 
