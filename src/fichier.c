@@ -2,17 +2,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-int saveAnimal(Animal a)
+// Fonction pour sauvegarder un animal dans un fichier
+int sauvegarderAnimal(Animal a)
 {
-    FILE *file = fopen("animals.txt", "a"); //"a"	Ajout (append) à la fin du fichier, sans supprimer son contenu.
+    FILE *file = fopen("animals.txt", "a"); // "a" Ajout (append) à la fin du fichier, sans supprimer son contenu.
     if (file == NULL)
     {
         printf("Erreur lors de l'ouverture du fichier");
         return 0;
     }
 
-    if (fprintf(file, "%d;%s;%s;%d;%.2f;%s\n", a.id, a.name, a.species, a.birthYear, a.weight, a.comment) < 0)
+    if (fprintf(file, "%d;%s;%s;%d;%.2f;%s\n", a.id, a.nom, a.espece, a.anneNaissance, a.poids, a.commentaire) < 0)
     {
         fclose(file);
         printf("Erreur lors de l'écriture du fichier");
@@ -22,30 +22,32 @@ int saveAnimal(Animal a)
     fclose(file);
     return 1;
 }
-int saveAnimals(Animal *animals, int size)
-{
-    printf("donne le nom du fichier \n");
-    char filename[50];
-    scanf("%s", filename);
-    char finalFilename[100];
-    snprintf(finalFilename, sizeof(finalFilename), "./src/animals/%s", filename);
 
-    FILE *file = fopen(finalFilename, "w"); // "w" écrase le contenu existant du fichier.
+// Fonction pour sauvegarder plusieurs animaux dans un fichier
+int sauvegarderAnimaux(Animal *animaux, int taille)
+{
+    printf("Donnez le nom du fichier \n");
+    char nomFichier[50];
+    scanf("%s", nomFichier);
+    char cheminFichier[100];
+    snprintf(cheminFichier, sizeof(cheminFichier), "./src/animals/%s", nomFichier);
+
+    FILE *file = fopen(cheminFichier, "w"); // "w" écrase le contenu existant du fichier.
     if (file == NULL)
     {
         printf("Erreur lors de l'ouverture du fichier.\n");
         return 0;
     }
 
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < taille; i++)
     {
         if (fprintf(file, "%d;%s;%s;%d;%.2f;%s\n",
-                    animals[i].id,
-                    animals[i].name,
-                    animals[i].species,
-                    animals[i].birthYear,
-                    animals[i].weight,
-                    animals[i].comment) < 0)
+                    animaux[i].id,
+                    animaux[i].nom,
+                    animaux[i].espece,
+                    animaux[i].anneNaissance,
+                    animaux[i].poids,
+                    animaux[i].commentaire) < 0)
         {
             fclose(file);
             printf("Erreur lors de l'écriture dans le fichier.\n");
@@ -56,67 +58,69 @@ int saveAnimals(Animal *animals, int size)
     fclose(file);
     return 1;
 }
-int loadAnimals(Animal *animals, int maxSize)
-{
-    printf("donne le nom du fichier \n");
-    char filename[50];
-    scanf("%s", filename);
-    char finalFilename[100];
-    snprintf(finalFilename, sizeof(finalFilename), "./src/animals/%s", filename);
 
-    FILE *file = fopen(finalFilename, "r");
+// Fonction pour charger des animaux depuis un fichier
+int chargerAnimaux(Animal *animaux, int tailleMax)
+{
+    printf("Donnez le nom du fichier \n");
+    char nomFichier[50];
+    scanf("%s", nomFichier);
+    char cheminFichier[100];
+    snprintf(cheminFichier, sizeof(cheminFichier), "./src/animals/%s", nomFichier);
+
+    FILE *file = fopen(cheminFichier, "r");
     if (file == NULL)
     {
         printf("Erreur : impossible d'ouvrir le fichier.\n");
         return 0;
     }
 
-    int count = 0;
-    while (count < maxSize && fscanf(file, "%d;%49[^;];%29[^;];%d;%f;%249[^\n]",
-                                     &animals[count].id,
-                                     animals[count].name,
-                                     animals[count].species,
-                                     &animals[count].birthYear,
-                                     &animals[count].weight,
-                                     animals[count].comment) == 6)
+    int compteur = 0;
+    while (compteur < tailleMax && fscanf(file, "%d;%49[^;];%29[^;];%d;%f;%249[^\n]",
+                                          &animaux[compteur].id,
+                                          animaux[compteur].nom,
+                                          animaux[compteur].espece,
+                                          &animaux[compteur].anneNaissance,
+                                          &animaux[compteur].poids,
+                                          animaux[compteur].commentaire) == 6)
     {
-        count++;
+        compteur++;
     }
 
     fclose(file);
-    return count;
+    return compteur;
 }
 
-
-
-int countAnimals(const char *filename)
+// Fonction pour compter le nombre d'animaux dans un fichier
+int compterAnimaux(const char *nomFichier)
 {
-    FILE *file = fopen(filename, "r");
+    FILE *file = fopen(nomFichier, "r");
     if (!file)
     {
         printf("Erreur : impossible d'ouvrir le fichier.\n");
         return -1;
     }
 
-    int count = 0;
+    int compteur = 0;
     Animal a;
-    while (fscanf(file, "%d %49s %29s %d %f %249s", &a.id, a.name, a.species, &a.birthYear, &a.weight, a.comment) == 6)
+    while (fscanf(file, "%d %49s %29s %d %f %249s", &a.id, a.nom, a.espece, &a.anneNaissance, &a.poids, a.commentaire) == 6)
     {
-        count++;
+        compteur++;
     }
 
     fclose(file);
-    return count;
+    return compteur;
 }
 
-int deleteAnimal(Animal *animals, int *size, int id)
+// Fonction pour supprimer un animal de la liste
+int supprimerAnimal(Animal *animaux, int *taille, int id)
 {
-    for (int i = 0; i < *size; i++)
+    for (int i = 0; i < *taille; i++)
     {
-        if (animals[i].id == id)
+        if (animaux[i].id == id)
         {
-            animals[i] = animals[*size - 1];
-            (*size)--;
+            animaux[i] = animaux[*taille - 1];
+            (*taille)--;
             return 1;
         }
     }

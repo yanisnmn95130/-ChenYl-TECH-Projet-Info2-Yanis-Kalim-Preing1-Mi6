@@ -2,10 +2,19 @@
 #define FICHIER_H
 #include "animal.h"
 
-int saveAnimal(Animal a);
-int loadAnimals(Animal* animals, int maxSize);
-int deleteAnimal(Animal *animals, int *size, int id);
-int countAnimals(const char *filename);
-int saveAnimals(Animal *animals, int size);
+
+int sauvegarderAnimal(Animal a);
+
+
+int chargerAnimaux(Animal* animaux, int tailleMax);
+
+
+int supprimerAnimal(Animal *animaux, int *taille, int id);
+
+
+int compterAnimaux(const char *nomFichier);
+
+
+int sauvegarderAnimaux(Animal *animaux, int taille);
 
 #endif

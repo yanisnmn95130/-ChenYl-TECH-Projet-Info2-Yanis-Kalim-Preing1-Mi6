@@ -6,6 +6,6 @@
 #include "animal.h"
 
 int chercheNom(Animal liste[], int taille, char *nomAnimal);
-int chercheSpecies(Animal liste[], int taille, char *specie);
+int chercheEspece(Animal liste[], int taille, char *espece);
 int chercheAge(Animal liste[], int taille, char *age);
 #endif

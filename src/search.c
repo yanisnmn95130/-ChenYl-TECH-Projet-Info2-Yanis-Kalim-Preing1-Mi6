@@ -7,21 +7,21 @@ int chercheNom(Animal liste[], int taille, char *nomAnimal)
 {
     for (int i = 0; i < taille; i++)
     {
-        if (strcmp(liste[i].name, nomAnimal) == 0)
+        if (strcmp(liste[i].nom, nomAnimal) == 0)
         {
-            printAnimal(liste[i]);
+            afficherAnimal(liste[i]);
         }
     }
     return 0;
 }
 
-int chercheSpecies(Animal liste[], int taille, char *specie)
+int chercheEspece(Animal liste[], int taille, char *specie)
 {
     for (int i = 0; i < taille; i++)
     {
-        if (strcmp(liste[i].species, specie) == 0)
+        if (strcmp(liste[i].espece, specie) == 0)
         {
-            printAnimal(liste[i]);
+            afficherAnimal(liste[i]);
         }
     }
     return 0;
@@ -33,16 +33,16 @@ int chercheAge(Animal liste[], int taille, char *age)
     {
         if (strcmp(age, "jeune") == 0)
         {
-            if (calculateage(liste[i].birthYear) < 2)
+            if (calculerAge(liste[i].anneNaissance) < 2)
             {
-                printAnimal(liste[i]);
+                afficherAnimal(liste[i]);
             }
         }
         if (strcmp(age, "senior") == 0)
         {
-            if (calculateage(liste[i].birthYear) > 10)
+            if (calculerAge(liste[i].anneNaissance) > 10)
             {
-                printAnimal(liste[i]);
+                afficherAnimal(liste[i]);
             }
         }
     }

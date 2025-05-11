@@ -7,24 +7,32 @@
 typedef struct
 {
     int id;
-    char name[50];
-    char species[30];
-    int birthYear;
-    float weight;
-    char comment[250];
+    char nom[50];      
+    char espece[30];    
+    int anneNaissance;       
+    float poids;        
+    char commentaire[250];   
 } Animal;
 
-void printAnimal(Animal a);
 
-Animal createAnimal(Animal *liste, int taille);
+void afficherAnimal(Animal a);
 
-int generateId(Animal *liste, int taille);
-int calculateage(int birthYear);
 
-int addAnimal(Animal *animals, int animalCount);
+Animal creerAnimal(Animal *liste, int taille);
 
-void dayFood(Animal liste[], int size);
 
-void presentRefuge(Animal liste[], int taille);
+int genererId(Animal *liste, int taille);
+
+
+int calculerAge(int anneNaissance);
+
+
+int ajouterAnimal(Animal *animaux, int nombreAnimaux);
+
+
+void besoinsQuotidiensCroquettes(Animal liste[], int taille);
+
+
+void presenterRefuge(Animal liste[], int taille);
 
 #endif

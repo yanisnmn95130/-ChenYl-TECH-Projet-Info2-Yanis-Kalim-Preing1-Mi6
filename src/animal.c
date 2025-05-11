@@ -2,10 +2,11 @@
 #include <time.h>
 #include "fichier.h"
 
-void inputText(const char *prompt, char *buffer, int bufferSize)
+// Fonction pour saisir un texte avec une limite de caractères
+void saisirTexte(const char *invite, char *buffer, int tailleBuffer)
 {
-        printf("%s: ", prompt);
-        fgets(buffer, bufferSize, stdin);
+        printf("%s: ", invite);
+        fgets(buffer, tailleBuffer, stdin);
 
         // Supprimer le caractère de nouvelle ligne (\n) si présent
         size_t len = strlen(buffer);
@@ -14,19 +15,22 @@ void inputText(const char *prompt, char *buffer, int bufferSize)
                 buffer[len - 1] = '\0';
         }
 }
-void printAnimal(Animal a)
+
+// Fonction pour afficher les détails d'un animal
+void afficherAnimal(Animal a)
 {
         printf("[ ");
         printf("ID : %d ", a.id);
-        printf("| NOM : %s ", a.name);
-        printf("| ESPECE : %s ", a.species);
-        printf("| Année de naissance : %d ", a.birthYear);
-        printf("| POIDS : %.2f ", a.weight);
-        printf("| DESCRIPTION : %s ", a.comment);
+        printf("| NOM : %s ", a.nom);
+        printf("| ESPECE : %s ", a.espece);
+        printf("| Année de naissance : %d ", a.anneNaissance);
+        printf("| POIDS : %.2f ", a.poids);
+        printf("| DESCRIPTION : %s ", a.commentaire);
         printf(" ]\n");
 }
 
-int generateId(Animal *liste, int taille)
+// Fonction pour générer un ID unique pour un animal
+int genererId(Animal *liste, int taille)
 {
         int maxId = 0;
 
@@ -42,50 +46,54 @@ int generateId(Animal *liste, int taille)
         return maxId + 1; // Retourne un ID unique
 }
 
-Animal createAnimal(Animal *liste, int taille)
+// Fonction pour créer un nouvel animal
+Animal creerAnimal(Animal *liste, int taille)
 {
         Animal a;
-        a.id = generateId(liste, taille);
-        inputText("saisir le nom", a.name, 50); // inputText: fonction permettant laffichage dun champs de texte, le stockage de ce texte et def dune limite de caractere
-        inputText("saisir l'espece", a.species, 30);
-        printf("saisir l'année de naissance");
-        scanf("%d", &a.birthYear);
-        printf("sasir le poids");
-        scanf("%f", &a.weight);
-        inputText("décrire l'animal", a.comment, 250);
+        a.id = genererId(liste, taille);
+        saisirTexte("saisir le nom", a.nom, 50);
+        saisirTexte("saisir l'espece", a.espece, 30);
+        printf("saisir l’année de naissance");
+        scanf("%d", &a.anneNaissance);
+        printf("saisir le poids");
+        scanf("%f", &a.poids);
+        saisirTexte("décrire l'animal", a.commentaire, 250);
         return a;
 }
 
-int calculateage(int birthYear)
+// Fonction pour calculer l'âge d'un animal
+int calculerAge(int anneeNaissance)
 {
-        int currentYear = 2025; // Remplacez par l'année actuelle
-        return currentYear - birthYear;
+        int anneeCourante = 2025; // Remplacez par l'année actuelle
+        return anneeCourante - anneeNaissance;
 }
 
-int addAnimal(Animal *animals, int animalCount)
+// Fonction pour ajouter un animal à la liste
+int ajouterAnimal(Animal *animaux, int nombreAnimaux)
 {
         // Vérifie si le tableau est plein
-        if (animalCount >= 50)
+        if (nombreAnimaux >= 50)
         {
                 printf("Erreur : Nombre maximum d'animaux atteint (50).\n");
-                return animalCount; // Retourne le nombre actuel d'animaux sans modification
+                return nombreAnimaux; // Retourne le nombre actuel d'animaux sans modification
         }
 
         // Crée un nouvel animal
-        Animal newAnimal = createAnimal(animals, animalCount);
+        Animal nouvelAnimal = creerAnimal(animaux, nombreAnimaux);
 
         // Ajoute le nouvel animal dans le tableau
-        animals[animalCount] = newAnimal;
+        animaux[nombreAnimaux] = nouvelAnimal;
 
         // Affiche un message de succès
         printf("Animal ajouté avec succès !\n");
-        printAnimal(newAnimal);
+        afficherAnimal(nouvelAnimal);
 
         // Retourne le nouveau nombre d'animaux
-        return animalCount + 1;
+        return nombreAnimaux + 1;
 }
 
-void presentRefuge(Animal liste[], int taille)
+// Fonction pour présenter les animaux du refuge
+void presenterRefuge(Animal liste[], int taille)
 {
         printf("\n===== Inventaire du Refuge =====\n");
 
@@ -97,15 +105,16 @@ void presentRefuge(Animal liste[], int taille)
         for (int i = 0; i < taille; i++)
         {
                 printf("animal %d :\n ", i + 1);
-                printAnimal(liste[i]); // printAnimal() prend un animal et affiche ses détails
+                afficherAnimal(liste[i]);
         }
 }
 
-void adoptAnimal(Animal liste[], int *taille)
+// Fonction pour adopter un animal
+void adopterAnimal(Animal liste[], int *taille)
 {
         char nomAnimal[50];
 
-        presentRefuge(liste, *taille);
+        presenterRefuge(liste, *taille);
 
         printf("Tapez le nom de l'animal que vous voulez adopter : ");
         scanf("%s", nomAnimal);
@@ -114,15 +123,15 @@ void adoptAnimal(Animal liste[], int *taille)
 
         for (int i = 0; i < *taille; i++)
         {
-                if (strcmp(liste[i].name, nomAnimal) == 0)
-                { // vérifie si les deux noms sont identiques,Si strcmp() retourne 0, cela signifie que l'animal recherché a été trouvé.
+                if (strcmp(liste[i].nom, nomAnimal) == 0)
+                {
                         printf("Félicitations !! %s vous appartient désormais, prenez-en soin !\n", nomAnimal);
                         // Supprimer l'animal adopté en décalant le reste
                         for (int j = i; j < *taille - 1; j++)
-                        { // Décale tous les animaux vers la gauche après l'animal supprimé.
+                        {
                                 liste[j] = liste[j + 1];
                         }
-                        (*taille)--; // Réduit la taille du refuge ((*taille)--).
+                        (*taille)--;
                         trouve = 1;
                         break;
                 }
@@ -134,59 +143,60 @@ void adoptAnimal(Animal liste[], int *taille)
         }
 }
 
-void dayFood(Animal liste[], int size)
+// Fonction pour calculer les besoins quotidiens en croquettes
+void besoinsQuotidiensCroquettes(Animal liste[], int taille)
 {
         int tabNourriture[4] = {0, 0, 0, 0}; // Initialisation à 0 pour éviter des valeurs aléatoires
         int tabNourritureTotal = 0;
 
         printf("\n===== Besoin quotidien en croquettes =====\n");
-        for (int i = 0; i < size; i++)
+        for (int i = 0; i < taille; i++)
         {
-                if (strcmp(liste[i].species, "hamster") == 0)
+                if (strcmp(liste[i].espece, "hamster") == 0)
                 {
                         int quantite = 20;
-                        printf("%s a besoin de %d grammes de croquettes par jour.\n", liste[i].name, quantite);
+                        printf("%s a besoin de %d grammes de croquettes par jour.\n", liste[i].nom, quantite);
                         tabNourriture[2] += quantite; // Index 2 pour hamster
                 }
-                else if (strcmp(liste[i].species, "autruche") == 0)
+                else if (strcmp(liste[i].espece, "autruche") == 0)
                 {
                         int quantite = 2500;
-                        printf("%s a besoin de %d grammes de croquettes par jour.\n", liste[i].name, quantite);
+                        printf("%s a besoin de %d grammes de croquettes par jour.\n", liste[i].nom, quantite);
                         tabNourriture[3] += quantite; // Index 3 pour autruche
                 }
-                else if (strcmp(liste[i].species, "chat") == 0)
+                else if (strcmp(liste[i].espece, "chat") == 0)
                 {
                         int quantite = 500;
-                        if (calculateage(liste[i].birthYear) < 2)
+                        if (calculerAge(liste[i].anneNaissance) < 2)
                         {
-                                printf("%s a besoin de %d grammes de croquettes par jour.\n", liste[i].name, quantite);
+                                printf("%s a besoin de %d grammes de croquettes par jour.\n", liste[i].nom, quantite);
                                 tabNourriture[0] += quantite; // Index 0 pour chat
                         }
                         else
                         {
-                                quantite = (int)(10 * liste[i].weight); // 10% du poids en grammes
-                                printf("%s a besoin de %d grammes de croquettes par jour.\n", liste[i].name, quantite);
+                                quantite = (int)(10 * liste[i].poids); // 10% du poids en grammes
+                                printf("%s a besoin de %d grammes de croquettes par jour.\n", liste[i].nom, quantite);
                                 tabNourriture[0] += quantite;
                         }
                 }
-                else if (strcmp(liste[i].species, "chien") == 0)
+                else if (strcmp(liste[i].espece, "chien") == 0)
                 {
                         int quantite = 500;
-                        if (calculateage(liste[i].birthYear) < 2)
+                        if (calculerAge(liste[i].anneNaissance) < 2)
                         {
-                                printf("%s a besoin de %d grammes de croquettes par jour.\n", liste[i].name, quantite);
+                                printf("%s a besoin de %d grammes de croquettes par jour.\n", liste[i].nom, quantite);
                                 tabNourriture[1] += quantite; // Index 1 pour chien
                         }
                         else
                         {
-                                quantite = (int)(10 * liste[i].weight); // 10% du poids en grammes
-                                printf("%s a besoin de %d grammes de croquettes par jour.\n", liste[i].name, quantite);
+                                quantite = (int)(10 * liste[i].poids); // 10% du poids en grammes
+                                printf("%s a besoin de %d grammes de croquettes par jour.\n", liste[i].nom, quantite);
                                 tabNourriture[1] += quantite;
                         }
                 }
                 else
                 {
-                        printf("Espèce inconnue pour l'animal %s.\n", liste[i].name);
+                        printf("Espèce inconnue pour l'animal %s.\n", liste[i].nom);
                 }
         }
 

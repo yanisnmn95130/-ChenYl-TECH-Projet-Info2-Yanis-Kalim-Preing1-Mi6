@@ -39,21 +39,21 @@ int main()
             if (taille < MAX_ANIMAUX)
             {
                 Animal nouvelAnimal;
-                nouvelAnimal.id = generateId(animaux, taille);
+                nouvelAnimal.id = genererId(animaux, taille);
 
                 printf("Entrez le nom de l'animal : ");
-                scanf("%s", nouvelAnimal.name);
+                scanf("%s", nouvelAnimal.nom);
 
                 int especeValide = 0;
                 do
                 {
                     printf("Entrez l'espèce de l'animal (chat, chien, autruche, hamster) : ");
-                    scanf("%s", nouvelAnimal.species);
+                    scanf("%s", nouvelAnimal.espece);
 
-                    if (strcmp(nouvelAnimal.species, "chat") == 0 ||
-                        strcmp(nouvelAnimal.species, "chien") == 0 ||
-                        strcmp(nouvelAnimal.species, "autruche") == 0 ||
-                        strcmp(nouvelAnimal.species, "hamster") == 0)
+                    if (strcmp(nouvelAnimal.espece, "chat") == 0 ||
+                        strcmp(nouvelAnimal.espece, "chien") == 0 ||
+                        strcmp(nouvelAnimal.espece , "autruche") == 0 ||
+                        strcmp(nouvelAnimal.espece, "hamster") == 0)
                     {
                         especeValide = 1;
                     }
@@ -64,18 +64,18 @@ int main()
                 } while (!especeValide);
 
                 printf("Entrez l'année de naissance de l'animal : ");
-                scanf("%d", &nouvelAnimal.birthYear);
+                scanf("%d", &nouvelAnimal.anneNaissance);
 
                 printf("Entrez le poids de l'animal (en kg) : ");
-                scanf("%f", &nouvelAnimal.weight);
+                scanf("%f", &nouvelAnimal.poids);
 
                 printf("Entrez un commentaire sur l'animal : ");
-                scanf(" %[^\n]", nouvelAnimal.comment);
+                scanf(" %[^\n]", nouvelAnimal.commentaire);
 
                 animaux[taille] = nouvelAnimal;
                 taille++;
                 printf("Animal ajouté avec succès !\n");
-                printAnimal(nouvelAnimal);
+                afficherAnimal(nouvelAnimal);
             }
             else
             {
@@ -104,7 +104,7 @@ int main()
                 char espece[30];
                 printf("Espèce de l'animal : ");
                 scanf("%s", espece);
-                if (chercheSpecies(animaux, taille, espece) == 0)
+                if (chercheEspece(animaux, taille, espece) == 0)
                 {
                     printf("Aucun animal trouvé avec cette espèce.\n");
                 }
@@ -137,7 +137,7 @@ int main()
                     ;
                 break;
             }
-            if (deleteAnimal(animaux, &taille, id))
+            if (supprimerAnimal(animaux, &taille, id))
             {
                 printf("Adoption réussie !\n");
             }
@@ -149,20 +149,20 @@ int main()
         }
 
         case 4:
-            presentRefuge(animaux, taille);
+            presenterRefuge(animaux, taille);
             break;
 
         case 5:
-            dayFood(animaux, taille);
+            besoinsQuotidiensCroquettes(animaux, taille);
             break;
 
         case 6:
             printf("Chargement des animaux depuis le fichier...\n");
-            taille = loadAnimals(animaux, MAX_ANIMAUX);
+            taille = chargerAnimaux(animaux, MAX_ANIMAUX);
             if (taille > 0)
             {
                 printf("Animaux chargés avec succès !\n");
-                presentRefuge(animaux, taille);
+                presenterRefuge(animaux, taille);
             }
             else
             {
@@ -171,11 +171,11 @@ int main()
             break;
         case 7:
             printf("Sauvegarde des données...\n");
-            saveAnimals(animaux, taille);
+            sauvegarderAnimaux(animaux, taille);
             break;
         case 8:
             printf("Sauvegarde des données...\n");
-            saveAnimals(animaux, taille);
+            sauvegarderAnimaux(animaux, taille);
             printf("Au revoir !\n");
             break;
 
