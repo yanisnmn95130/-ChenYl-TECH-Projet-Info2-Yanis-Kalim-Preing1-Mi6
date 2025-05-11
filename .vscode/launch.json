@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/kalim/Desktop/projet_info/-ChenYl-TECH-Projet-Info2-Yanis-Kalim-Preing1-Mi6/src",
-      "program": "c:/Users/kalim/Desktop/projet_info/-ChenYl-TECH-Projet-Info2-Yanis-Kalim-Preing1-Mi6/src/build/Debug/outDebug",
+      "cwd": "c:/Users/kalim/Desktop/projet_info/-ChenYl-TECH-Projet-Info2-Yanis-Kalim-Preing1-Mi6",
+      "program": "c:/Users/kalim/Desktop/projet_info/-ChenYl-TECH-Projet-Info2-Yanis-Kalim-Preing1-Mi6/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
